@@ -14,6 +14,15 @@ function run(command, args, optional = false) {
   catch (error) { if (!optional) throw new Error(`${command}: ${error.stderr?.toString().trim() || error.message}`); return null; }
 }
 
+export function systemdUnit({ id, args, workingDirectory }) {
+  if (!path.isAbsolute(workingDirectory) || /[\r\n]/.test(workingDirectory)) throw new Error('systemd working directory must be an absolute, single-line path.');
+  // WorkingDirectory is a literal path, unlike ExecStart's quoted arguments.
+  return ['[Unit]', `Description=DreamMate MCP (${id})`, 'After=network.target', '',
+    '[Service]', 'Type=simple', 'WorkingDirectory=' + workingDirectory.replaceAll('%', '%%'),
+    'ExecStart=' + args.map(unitQuote).join(' '), 'Restart=on-failure', 'RestartSec=5', '',
+    '[Install]', 'WantedBy=default.target', ''].join('\n');
+}
+
 export async function checkServicePort(port, serviceId) {
   const probe = net.createServer();
   const occupied = await new Promise((resolve, reject) => {
@@ -75,20 +84,7 @@ export async function serviceCommand(action, { id, roots, port, agent, readOnly,
 </dict></plist>
 `;
   } else {
-    content = `[Unit]
-Description=DreamMate MCP (${id})
-After=network.target
-
-[Service]
-Type=simple
-WorkingDirectory=${unitQuote(packageDir)}
-ExecStart=${args.map(unitQuote).join(' ')}
-Restart=on-failure
-RestartSec=5
-
-[Install]
-WantedBy=default.target
-`;
+    content = systemdUnit({ id, args, workingDirectory: packageDir });
   }
   await fs.writeFile(filename, content, { mode: 0o600 });
   if (process.platform === 'darwin') {

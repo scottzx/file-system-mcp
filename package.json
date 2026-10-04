@@ -1,6 +1,6 @@
 {
   "name": "@1agents/file-system-mcp",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Official filesystem and base MCP services for the DreamMate capability network",
   "type": "module",
   "license": "MIT",

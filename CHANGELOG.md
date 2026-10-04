@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.2
+
+- Fix Linux user-service installation by writing WorkingDirectory as a literal path.
+- Verify generated units with systemd's parser on Linux, including paths containing spaces and percent signs.
+
 ## 0.2.1
 
 - Publish the source on GitHub and add Linux/macOS CI with the locked Python runtime.

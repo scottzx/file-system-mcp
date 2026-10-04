@@ -1,16 +1,40 @@
 {
   "name": "@1agents/file-system-mcp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Official filesystem and base MCP services for the DreamMate capability network",
   "type": "module",
   "license": "MIT",
-  "repository": { "type": "git", "url": "git+https://github.com/scottzx/file-system-mcp.git" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scottzx/file-system-mcp.git"
+  },
   "homepage": "https://github.com/scottzx/file-system-mcp#readme",
-  "bugs": { "url": "https://github.com/scottzx/file-system-mcp/issues" },
-  "bin": { "file-system-mcp": "bin/file-system-mcp.mjs", "base-mcp": "bin/base-mcp.mjs" },
-  "exports": { ".": "./src/bridge.mjs" },
-  "files": ["bin", "src", "scripts", "skills", "requirements.in", "requirements.lock", "BASE_MCP.md", "README.md", "LICENSE", "THIRD_PARTY_NOTICES.md"],
-  "engines": { "node": ">=22.5" },
+  "bugs": {
+    "url": "https://github.com/scottzx/file-system-mcp/issues"
+  },
+  "bin": {
+    "file-system-mcp": "bin/file-system-mcp.mjs",
+    "base-mcp": "bin/base-mcp.mjs"
+  },
+  "exports": {
+    ".": "./src/bridge.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "scripts",
+    "skills",
+    "requirements.in",
+    "requirements.lock",
+    "BASE_MCP.md",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "engines": {
+    "node": ">=22.5"
+  },
   "scripts": {
     "start": "node bin/file-system-mcp.mjs serve",
     "test": "node --test test/*.test.mjs",
@@ -23,5 +47,8 @@
     "@modelcontextprotocol/server-memory": "2026.8.31",
     "@modelcontextprotocol/server-sequential-thinking": "2026.8.31"
   },
-  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org" }
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
 }
